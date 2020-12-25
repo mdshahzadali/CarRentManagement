@@ -2,24 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarRentManagement.Models
 {
-    public class Car
+    public class CarViewModel
     {
-        public int Id { get; set; }
         [Display(Name = "Car Name")]
-        [Required(ErrorMessage ="Car name is required")]
+        [Required(ErrorMessage = "Car name is required")]
         public string CarName { get; set; }
-        [Display(Name = "car image")]
-        public string CarImageUrl { get; set; }
-        [Required(ErrorMessage = "Rent is required")]
+        [Display(Name = "Hourly Rent")]
         public decimal HourlyRent { get; set; }
         [Display(Name = "Car Number")]
         public string CarNumber { get; set; }
         public bool IsAvailable { get; set; }
+
+        //Not mapped propety used only image upload
+        [Display(Name = "Choose the car image")]
+        public IFormFile CarImage { get; set; }
     }
 }

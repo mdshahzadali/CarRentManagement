@@ -4,3 +4,6 @@
 
 /.vs
 /CarRentManagement/.vs/CarRentManagement/v16
+/CarRentManagement/CarRentManagement/obj/Debug/net5.0/Razor/Views/Home
+/CarRentManagement/.vs/CarRentManagement/DesignTimeBuild/.dtbcache.v2
+/CarRentManagement/CarRentManagement/bin/Debug/net5.0

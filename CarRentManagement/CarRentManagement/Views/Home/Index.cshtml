@@ -1,59 +1,28 @@
 ﻿@model IEnumerable<CarRentManagement.Models.Car>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
+<h1 class="text-primary">Check below car for rent</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CarName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HourlyRent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAvailable)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HourlyRent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAvailable)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card-deck">
+    @foreach (var cars in Model)
+    {
+        var carImagePath = "~/Images/CarImage" + "/" + (cars.CarImageUrl ?? "noimage.jpg");
+        <div class="col-md-4">
+            <div class="card m-3">
+                <div class="card-header">
+                    <h3>@cars.CarName</h3>
+                </div>
+                <img class="card-img-top" src="@carImagePath" asp-append-version="true" />
+                <h4 class="text-center">Hourly Rent:<b>@cars.HourlyRent</b></h4>
+                <h4 class="text-center">Car Number:<b>@cars.CarNumber</b></h4>
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@cars.Id">Edit</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@cars.Id">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@cars.Id">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

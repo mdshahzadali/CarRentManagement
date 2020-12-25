@@ -1,0 +1,90 @@
+﻿@model CarRentManagement.Models.CarViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<hr />
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Create New Car Here</h3>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status" id="myLoader" style="display:none">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <form asp-action="Create" enctype="multipart/form-data" method="post" data-ajax="true" data-ajax-complete="myComplete"
+              data-ajax-success="mySuccess" data-ajax-failure="myFailure" data-ajax-loading="#myLoader" asp-controller="Home">
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="CarName" class="control-label"></label>
+                            <input asp-for="CarName" class="form-control" />
+                            <span asp-validation-for="CarName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="CarImage" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="CarImage" class="custom-file-input" id="customFile" />
+                                <label class="custom-file-label" for="customFile"></label>
+                            </div>
+                            <span asp-validation-for="CarImage" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="HourlyRent" class="control-label"></label>
+                            <input asp-for="HourlyRent" class="form-control" />
+                            <span asp-validation-for="HourlyRent" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="CarNumber" class="control-label"></label>
+                            <input asp-for="CarNumber" class="form-control" />
+                            <span asp-validation-for="CarNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsAvailable" /> @Html.DisplayNameFor(model => model.IsAvailable)
+                            </label>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function myComplete(data) {
+        }
+        function mySuccess(data) {
+            console.log(data);
+        }
+        function myFailure() {
+            alert("I am from failure!")
+        }
+    </script>
+}
