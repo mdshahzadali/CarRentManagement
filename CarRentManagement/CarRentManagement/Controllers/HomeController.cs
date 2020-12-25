@@ -1,4 +1,5 @@
 ﻿using CarRentManagement.Models;
+using CarRentManagement.Models.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,17 @@ namespace CarRentManagement.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly CarRentDbContext _dbContext;
+        public HomeController(ILogger<HomeController> logger, CarRentDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var carList = _dbContext.Cars.ToList();
+            return View(carList);
         }
 
         public IActionResult Privacy()
